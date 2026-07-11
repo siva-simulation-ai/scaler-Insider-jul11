@@ -1102,7 +1102,7 @@ keep each section 3-5 sentences max. lowercase preferred. be iconic.`;
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      model: 'llama3-8b-8192',
+      model: 'llama-3.1-8b-instant',
       messages: [{ role: 'user', content: prompt }],
       temperature: 0.92,
       max_tokens: 900
@@ -1572,6 +1572,15 @@ window.addEventListener('DOMContentLoaded', ()=>{
     <!-- messages injected by JS -->
   </div>
 
+  <div id="chatKeyRow" style="display:none; padding: 0 14px 10px; gap:6px; flex-direction:column;">
+    <div style="font-size:0.7rem;color:#8080aa;margin-bottom:2px">🔑 Groq API Key (<a href="https://console.groq.com" target="_blank" style="color:var(--neon-blue)">free here</a>)</div>
+    <div style="display:flex;gap:6px">
+      <input id="chatKeyInput" type="password" placeholder="gsk_..."
+        style="flex:1;background:rgba(10,8,30,0.8);border:1px solid rgba(168,85,247,0.3);border-radius:8px;padding:8px 12px;color:#e8e8f8;font-size:0.82rem;font-family:'Rajdhani',sans-serif;outline:none;">
+      <button onclick="saveChatKey()" style="background:linear-gradient(135deg,#6d28d9,#a855f7);border:none;border-radius:8px;padding:8px 14px;color:white;cursor:pointer;font-size:0.8rem;font-family:'Rajdhani',sans-serif;font-weight:700;">SAVE</button>
+    </div>
+  </div>
+
   <div id="chatSuggestions">
     <button class="sug-btn" onclick="askSuggestion(this)">💰 My lucky investment?</button>
     <button class="sug-btn" onclick="askSuggestion(this)">🚀 Best career for me?</button>
@@ -1600,14 +1609,28 @@ function toggleChat() {
   if (chatOpen && chatHistory.length === 0) {
     const sign = lastReading.sign || '';
     const name = lastReading.name || 'cosmic traveller';
+    const hasKey = !!(_apiKey || localStorage.getItem('cgo_key'));
+    if (!hasKey) {
+      document.getElementById('chatKeyRow').style.display = 'flex';
+    }
     const greeting = sign
-      ? `Namaste ${name}! 🙏 I am AstroFin GPT — your AI oracle powered by Vedic wisdom and Groq's LLaMA. You are a ${sign}! Ask me anything about your destiny, money, career, love, or the cosmos. The stars are listening… 🌟`
-      : `Namaste, cosmic traveller! 🙏 I am AstroFin GPT — your AI oracle. Get your reading first, or just ask me anything about astrology, Vedic wisdom, finance, or your destiny! 🔮`;
+      ? `namaste ${name}! 🙏 i'm AstroFin GPT — your chaotic gen z vedic oracle powered by groq's llama. you're a ${sign}! ask me anything about your destiny, money, career, love, or whatever the cosmos is doing rn 🌟`
+      : `namaste cosmic traveller! 🙏 i'm AstroFin GPT. get your reading first (fill the form above) for a personalised experience, or just ask me anything about astrology, vedic wisdom, or your life! 🔮`;
     addBotMessage(greeting);
   }
   if (chatOpen) {
     setTimeout(() => document.getElementById('chatInput').focus(), 300);
   }
+}
+
+function saveChatKey() {
+  const key = document.getElementById('chatKeyInput').value.trim();
+  if (!key) { addBotMessage("bestie you didn't enter anything 💀 paste your gsk_ key from console.groq.com"); return; }
+  _apiKey = key;
+  localStorage.setItem('cgo_key', key);
+  document.getElementById('ukey').value = key;
+  document.getElementById('chatKeyRow').style.display = 'none';
+  addBotMessage("key saved bestie! ✨ the oracle is now fully powered. ask me anything — the cosmos is listening 🔮");
 }
 
 function addBotMessage(text) {
@@ -1692,7 +1715,7 @@ ${z ? `the user is ${lastReading.name}, a ${sign} (${z.rashi} Rashi), ruled by $
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        model: 'llama3-8b-8192',
+        model: 'llama-3.1-8b-instant',
         messages: [
           { role: 'system', content: systemPrompt },
           ...chatHistory.slice(-8)
@@ -1712,12 +1735,21 @@ ${z ? `the user is ${lastReading.name}, a ${sign} (${z.rashi} Rashi), ruled by $
 
   } catch (err) {
     removeTyping();
-    const offlineReplies = [
-      "🔮 The cosmic WiFi is down (no API key detected)! Add your Groq key in the form above to unlock full AI powers. Meanwhile: Mercury says trust your gut today. 💫",
-      "⚡ Shani (Saturn) is blocking my API connection! Add your Groq key above to chat with the full oracle. Free at console.groq.com! 🪐",
-      "🌙 The oracle needs its API key to speak fully! Get a free Groq key at console.groq.com and paste it in the form above. Ganesha will remove this obstacle! 🐘"
-    ];
-    addBotMessage(offlineReplies[Math.floor(Math.random() * offlineReplies.length)]);
+    const isNoKey = !apiKey;
+    const errMsg = err.message || '';
+    let reply;
+    if (isNoKey) {
+      reply = "bestie i literally cannot read your stars without a Groq API key 😭 add it in the form above and click Consult first, THEN come chat with me. free key at console.groq.com 🔮";
+    } else if (errMsg.includes('401') || errMsg.includes('invalid_api_key') || errMsg.toLowerCase().includes('invalid')) {
+      reply = "your API key said 'nope' and walked out 💀 double-check your Groq key at console.groq.com — it should start with gsk_. copy-paste carefully bestie, no extra spaces.";
+    } else if (errMsg.includes('429') || errMsg.toLowerCase().includes('rate')) {
+      reply = "okay so you literally consulted the stars so much that Groq said 'bestie take a breath' 😭 rate limit hit. wait 30 seconds and try again. the cosmos needs a moment.";
+    } else if (errMsg.includes('Failed to fetch') || errMsg.includes('network') || errMsg.toLowerCase().includes('fetch')) {
+      reply = "cosmic WiFi is down fr 🌐💀 check your internet connection bestie. the oracle is online, your network might not be.";
+    } else {
+      reply = `oracle error: ${errMsg || 'unknown vibes'} 🔮 try again in a moment — the cosmic servers are probably just having a moment. periodt.`;
+    }
+    addBotMessage(reply);
   }
 
   document.getElementById('chatSend').disabled = false;
