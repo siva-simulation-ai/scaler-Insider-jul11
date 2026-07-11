@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>🔮 CosmicGPT Oracle — AI Vedic Astrology</title>
+<title>🔮 AstroFin GPT — AI Vedic Astrology</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
@@ -358,7 +358,7 @@ footer a { color: var(--neon-blue); text-decoration: none; }
   <!-- HERO -->
   <div class="hero">
     <span class="hero-icon">🔮</span>
-    <h1>CosmicGPT Oracle</h1>
+    <h1>AstroFin GPT</h1>
     <p class="sub">Where 5000 Years of Vedic Wisdom Meets Artificial Intelligence</p>
     <p class="tagline">"ॐ नमः शिवाय… and also, Hello World."</p>
     <div class="badges">
@@ -385,9 +385,25 @@ footer a { color: var(--neon-blue); text-decoration: none; }
         <label>✨ Your Name</label>
         <input type="text" id="uname" placeholder="e.g. Siva Kumar">
       </div>
-      <div class="fg">
+      <div class="fg" style="grid-column: span 2;">
         <label>🎂 Date of Birth</label>
-        <input type="date" id="udob" max="2010-01-01">
+        <div style="display:flex; gap:8px;">
+          <select id="uday" style="flex:1; background:rgba(0,0,25,0.7); border:1px solid rgba(0,212,255,0.25); border-radius:10px; padding:12px 8px; color:#e0e0ff; font-size:0.95rem; font-family:'Rajdhani',sans-serif; outline:none;">
+            <option value="">Day</option>
+          </select>
+          <select id="umonth" style="flex:1.4; background:rgba(0,0,25,0.7); border:1px solid rgba(0,212,255,0.25); border-radius:10px; padding:12px 8px; color:#e0e0ff; font-size:0.95rem; font-family:'Rajdhani',sans-serif; outline:none;">
+            <option value="">Month</option>
+            <option value="1">January</option><option value="2">February</option>
+            <option value="3">March</option><option value="4">April</option>
+            <option value="5">May</option><option value="6">June</option>
+            <option value="7">July</option><option value="8">August</option>
+            <option value="9">September</option><option value="10">October</option>
+            <option value="11">November</option><option value="12">December</option>
+          </select>
+          <select id="uyear" style="flex:1.2; background:rgba(0,0,25,0.7); border:1px solid rgba(0,212,255,0.25); border-radius:10px; padding:12px 8px; color:#e0e0ff; font-size:0.95rem; font-family:'Rajdhani',sans-serif; outline:none;">
+            <option value="">Year</option>
+          </select>
+        </div>
       </div>
       <div class="fg">
         <label>⏰ Time of Birth <span style="color:#404060">(optional)</span></label>
@@ -794,7 +810,8 @@ Keep each section to 3-5 sentences. Be memorable, warm, and genuinely helpful.`;
 ═══════════════════════════════════════════════ */
 function renderProfile(name, dob, sign, lifePath) {
   const z = ZODIAC[sign];
-  const [y,m,d] = dob.split('-').map(Number);
+  const parts = dob.split('-').map(Number);
+  const y = parts[0], m = parts[1], d = parts[2];
   const cn = getChineseZodiac(y);
 
   document.getElementById('zodiacEmoji').textContent = z.e;
@@ -922,15 +939,17 @@ let lastReading = { name:'', sign:'' };
 
 async function consult() {
   const name  = document.getElementById('uname').value.trim();
-  const dob   = document.getElementById('udob').value;
+  const day   = parseInt(document.getElementById('uday').value);
+  const month = parseInt(document.getElementById('umonth').value);
+  const year  = parseInt(document.getElementById('uyear').value);
   const city  = document.getElementById('ucity').value.trim() || 'India';
   const apiKey= document.getElementById('ukey').value.trim();
 
-  if (!name) return alert('🔮 Please enter your name, cosmic traveller!');
-  if (!dob)  return alert('🎂 Please enter your date of birth!');
+  if (!name)              return alert('🔮 Please enter your name, cosmic traveller!');
+  if (!day||!month||!year) return alert('🎂 Please select your complete date of birth!');
 
-  const [y,m,d] = dob.split('-').map(Number);
-  const sign    = getZodiac(m, d);
+  const dob  = `${year}-${String(month).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
+  const sign = getZodiac(month, day);
   const z       = ZODIAC[sign];
   const lp      = getLifePath(dob);
 
@@ -1013,6 +1032,21 @@ function reset() {
    INIT
 ═══════════════════════════════════════════════ */
 window.addEventListener('DOMContentLoaded', ()=>{
+  // Populate day dropdown 1-31
+  const dayEl = document.getElementById('uday');
+  for (let i=1; i<=31; i++) {
+    const o = document.createElement('option');
+    o.value = i; o.textContent = i;
+    dayEl.appendChild(o);
+  }
+  // Populate year dropdown (current year down to 1940)
+  const yearEl = document.getElementById('uyear');
+  const curYear = new Date().getFullYear();
+  for (let y = curYear - 10; y >= 1940; y--) {
+    const o = document.createElement('option');
+    o.value = y; o.textContent = y;
+    yearEl.appendChild(o);
+  }
   const saved = localStorage.getItem('cgo_key');
   if (saved) document.getElementById('ukey').value = saved;
   setMode('ai');
