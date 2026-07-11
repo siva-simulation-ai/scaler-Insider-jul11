@@ -1245,9 +1245,191 @@ function startLoadMessages() {
 }
 
 /* ═══════════════════════════════════════════════
-   MAIN CONSULT
+   FINANCE KUNDALI
 ═══════════════════════════════════════════════ */
+const FINANCE_DATA = {
+  Aries:       { wealth:'High Risk Hustler', style:'YOLO investor who somehow wins', sector:'Tech Startups & AI', avoid:'Impulse crypto at 2am', savings:'Low (fix this bestie)', growth:'🚀 Fast', tip:'Automate ₹5k/month SIP before your brain can object. future you will cry happy tears.' },
+  Taurus:      { wealth:'Steady Wealth Builder', style:'Luxury SIP queen/king', sector:'Real Estate & Gold', avoid:'Overspending on aesthetic things', savings:'High ✨', growth:'🌱 Slow & Steady', tip:'Your portfolio should be as beautiful as your home. ETFs + gold + real estate = that girl/guy energy.' },
+  Gemini:      { wealth:'Multi-Income Magician', style:'Five side hustles running simultaneously', sector:'Content, Tech & Freelance', avoid:'New course every week syndrome', savings:'Medium (automate it rn)', growth:'⚡ Sporadic', tip:'You earn in bursts. auto-invest during the bursts. past Gemini you will thank present Gemini you.' },
+  Cancer:      { wealth:'Fortress Builder', style:'Emergency fund as self-care', sector:'Healthcare & Food Tech', avoid:'Lending money to people who drain you', savings:'Very High 🏰', growth:'🌙 Emotional but steady', tip:'Build the financial fortress: 6-month emergency fund → index funds → then treats. safety is your superpower.' },
+  Leo:         { wealth:'Bold Portfolio CEO', style:'Invests in things they can show off', sector:'Entertainment & Brand Equity', avoid:'Overpaying for status symbols', savings:'Medium (spend less on vibes)', growth:'🌟 High potential', tip:'Your personal brand IS an asset. invest in it. also: index funds on Sunday > shopping spree on Sunday.' },
+  Virgo:       { wealth:'Spreadsheet Slay Queen', style:'Most optimised portfolio in the zodiac', sector:'Healthcare, Data & Fintech', avoid:'Analysis paralysis (just buy it bestie)', savings:'Very High 📊', growth:'📈 Consistent', tip:'You already know everything. the only fix: set a 48hr deadline on financial decisions. then execute. periodt.' },
+  Libra:       { wealth:'Balanced Portfolio Aesthetic', style:'Pretty portfolio, occasional indecision', sector:'Design, Luxury & AI Ethics', avoid:'Waiting for the perfect moment (it never comes)', savings:'Medium', growth:'⚖️ Balanced', tip:'24hr rule: decide on any investment within 24 hours or auto-invest in index fund. stop waiting for signs.' },
+  Scorpio:     { wealth:'High Stakes Power Player', style:'All-in on strong convictions', sector:'Crypto, Deep Tech & Intelligence', avoid:'All-or-nothing on single bets', savings:'Low-Medium (diversify!)', growth:'💀 Extreme highs/lows', tip:'your instincts are genuinely good. diversify them across 5 bets instead of going all-in on 1. risk management is not weakness.' },
+  Sagittarius: { wealth:'Knowledge Economy Earner', style:'Invests in self first, market second', sector:'Education, Travel Tech & AI Research', avoid:'FOMO investing after reading one article', savings:'Low-Medium', growth:'🎯 Knowledge-driven', tip:'your skills compound like interest. one certification this quarter. one investment account this quarter. both. not either.' },
+  Capricorn:   { wealth:'Generational Wealth Architect', style:'The most patient investor alive', sector:'Infrastructure, Finance & Enterprise AI', avoid:'Nothing — you are literally doing it right', savings:'Very High 🏆', growth:'🪨 Rock solid', tip:'you are already the strategy. just keep going. boring wins. compound interest is your love language and it loves you back.' },
+  Aquarius:    { wealth:'Disruptive Portfolio Thinker', style:'Invests in ideas before the market does', sector:'Blockchain, Climate Tech & Open Source', avoid:'Philosophising instead of executing', savings:'Low (automate immediately)', growth:'💡 Unpredictable genius', tip:'your ideas monetise. automate investments first, philosophise about capitalism second. sequential, not simultaneous.' },
+  Pisces:      { wealth:'Intuitive Trend Spotter', style:'Feels the market before it moves', sector:'Creative AI, Mental Health Tech & Art', avoid:'Trusting vibes over data (sometimes)', savings:'Low-Medium', growth:'🌊 Flow-based', tip:'your intuition about trends is worth money. write it down. then execute before Neptune convinces you it was just a feeling.' }
+};
+
+function renderFinanceKundali(sign, lifePath) {
+  const f = FINANCE_DATA[sign];
+  const z = ZODIAC[sign];
+  const bars = [
+    { label:'Wealth Potential',  pct: {Aries:72,Taurus:88,Gemini:75,Cancer:82,Leo:85,Virgo:92,Libra:78,Scorpio:80,Sagittarius:70,Capricorn:95,Aquarius:73,Pisces:68}[sign], color:'linear-gradient(90deg,#f5c842,#f97316)' },
+    { label:'Savings Rate',      pct: {Aries:40,Taurus:85,Gemini:55,Cancer:90,Leo:60,Virgo:88,Libra:65,Scorpio:50,Sagittarius:48,Capricorn:92,Aquarius:42,Pisces:52}[sign], color:'linear-gradient(90deg,#34d399,#0ea5e9)' },
+    { label:'Investment Timing', pct: {Aries:80,Taurus:70,Gemini:85,Cancer:65,Leo:75,Virgo:78,Libra:60,Scorpio:88,Sagittarius:72,Capricorn:90,Aquarius:82,Pisces:74}[sign], color:'linear-gradient(90deg,#a855f7,#ec4899)' },
+    { label:'Risk Tolerance',    pct: {Aries:90,Taurus:45,Gemini:70,Cancer:35,Leo:75,Virgo:50,Libra:55,Scorpio:95,Sagittarius:80,Capricorn:60,Aquarius:78,Pisces:58}[sign], color:'linear-gradient(90deg,#f43f5e,#f97316)' },
+  ];
+
+  const grid = [
+    { icon:'💼', label:'Wealth Style',   val: f.wealth   },
+    { icon:'📈', label:'Growth Sector',  val: f.sector   },
+    { icon:'💰', label:'Savings Energy', val: f.savings  },
+    { icon:'🎯', label:'Growth Pattern', val: f.growth   },
+    { icon:'⚠️', label:'Money Trap',     val: f.avoid    },
+    { icon:'🪐', label:'Money Planet',   val: z.pl       },
+  ];
+
+  let html = `<div class="fin-grid">${grid.map(g=>`
+    <div class="fin-item">
+      <div class="fi-icon">${g.icon}</div>
+      <div class="fi-label">${g.label}</div>
+      <div class="fi-val">${g.val}</div>
+    </div>`).join('')}</div>`;
+
+  html += `<div class="wealth-bar-wrap">${bars.map(b=>`
+    <div style="margin-bottom:12px">
+      <div class="wealth-bar-label"><span>${b.label}</span><span>${b.pct}%</span></div>
+      <div class="wealth-bar-track"><div class="wealth-bar-fill" style="width:${b.pct}%;background:${b.color}"></div></div>
+    </div>`).join('')}</div>`;
+
+  html += `<div class="fin-tips">
+    <div class="fin-tip">
+      <div class="ft-icon">🔮</div>
+      <div class="ft-body">
+        <div class="ft-title">cosmic money tip for ${sign}</div>
+        <div class="ft-text">${f.tip}</div>
+      </div>
+    </div>
+    <div class="fin-tip" style="border-left-color:var(--neon-blue)">
+      <div class="ft-icon">💎</div>
+      <div class="ft-body">
+        <div class="ft-title">lucky wealth gem & day</div>
+        <div class="ft-text">wear <strong style="color:var(--gold-soft)">${z.gem}</strong> on <strong style="color:var(--gold-soft)">${z.day}</strong> when making financial decisions. ${z.god} literally blesses money moves made on this day. no cap.</div>
+      </div>
+    </div>
+    <div class="fin-tip" style="border-left-color:var(--neon-green)">
+      <div class="ft-icon">🧮</div>
+      <div class="ft-body">
+        <div class="ft-title">life path ${lifePath} money vibe</div>
+        <div class="ft-text">${{1:'you earn through leadership. charge more. you are worth it.',2:'partnerships bring your biggest financial wins. co-found. collaborate.',3:'your creativity IS the business. monetise your voice and ideas.',4:'consistent systems build your wealth. automate everything.',5:'multiple streams are your destiny. never rely on one source.',6:'service-based income and community businesses thrive for you.',7:'research and expertise are your currency. become THE expert.',8:'you are literally built for financial power. shani rewards your discipline.',9:'your wealth multiplies when you give. teach, serve, and earn.',11:'visionary ideas attract unusual money. trust the unconventional path.',22:'you are built to create wealth at scale. think bigger than a salary.',33:'teaching and healing create abundance for you. impact = income.'}[lifePath] || 'your numbers are working in your favour. stay consistent bestie.'}</div>
+      </div>
+    </div>
+  </div>`;
+
+  document.getElementById('financeKundali').innerHTML = html;
+}
+
+/* ═══════════════════════════════════════════════
+   LIFE PATH CHAKRA
+═══════════════════════════════════════════════ */
+const NAKSHATRA_MAP = {
+  Aries:'Ashwini / Bharani',Taurus:'Krittika / Rohini',Gemini:'Mrigashira / Ardra',
+  Cancer:'Punarvasu / Pushya',Leo:'Magha / Purva Phalguni',Virgo:'Uttara Phalguni / Hasta',
+  Libra:'Chitra / Swati',Scorpio:'Vishakha / Anuradha',Sagittarius:'Mula / Purva Ashadha',
+  Capricorn:'Uttara Ashadha / Shravana',Aquarius:'Dhanishta / Shatabhisha',Pisces:'Purva Bhadrapada / Revati'
+};
+const NAKSHATRA_MEANING = {
+  Aries:'swift horses of the dawn — you were born to sprint, not stroll bestie',
+  Taurus:'fire of the pleiades — slow burn with generational impact, no cap',
+  Gemini:'deer head & the teardrop — curious, searching, and weirdly ahead of the curve',
+  Cancer:'the quiver & the flower — nurturing but secretly the strongest person in the room',
+  Leo:'the throne & the bed of honour — you were literally born for the spotlight fr',
+  Virgo:'the hand of favour — gifted with precision that borders on supernatural',
+  Libra:'the bright one & the star of independence — balance and bold moves simultaneously',
+  Scorpio:'the forked branch & the friendship star — intense, loyal, and lowkey psychic',
+  Sagittarius:'the root & the undefeated — you seek truth even when it\'s uncomfortable. iconic.',
+  Capricorn:'the universal star & the ear of hearing — patient, wise, and cosmically inevitable',
+  Aquarius:'the drum & the hundred healers — your weirdness IS your superpower bestie',
+  Pisces:'the former lucky stars & the wealthy — you dream in dimensions others can\'t see'
+};
+const LIFE_CHAKRA = {
+  Aries:      {str:'Initiative & Courage',    wk:'Patience & Follow-through', lesson:'finish what you start and the whole cosmos unlocks for you',       peak:'28-35',  chakra:'Root + Solar Plexus',  mantra:'Om Mangalaya Namah'},
+  Taurus:     {str:'Persistence & Beauty',    wk:'Stubbornness & Change',     lesson:'sometimes the pivot IS the plan and that\'s not failure',          peak:'32-40',  chakra:'Root + Heart',         mantra:'Om Shukraya Namah'},
+  Gemini:     {str:'Adaptability & Wit',      wk:'Focus & Consistency',       lesson:'depth over breadth — one skill mastered pays more than five half-done', peak:'25-32', chakra:'Throat + Sacral',  mantra:'Om Budhaya Namah'},
+  Cancer:     {str:'Intuition & Loyalty',     wk:'Emotional Boundaries',      lesson:'protecting your energy IS protecting your purpose bestie',          peak:'30-38',  chakra:'Heart + Third Eye',    mantra:'Om Chandraya Namah'},
+  Leo:        {str:'Leadership & Charisma',   wk:'Ego & Delegation',          lesson:'the best leaders build other leaders, not followers',               peak:'28-36',  chakra:'Solar Plexus + Crown', mantra:'Om Suryaya Namah'},
+  Virgo:      {str:'Precision & Analysis',    wk:'Perfectionism & Self-Critic',lesson:'done is better than perfect and shani agrees',                    peak:'32-42',  chakra:'Throat + Root',        mantra:'Om Budhaya Namah'},
+  Libra:      {str:'Harmony & Diplomacy',     wk:'Indecision & People-Pleasing','lesson':'choosing yourself is not selfish it\'s cosmically necessary',   peak:'29-37',  chakra:'Heart + Crown',        mantra:'Om Shukraya Namah'},
+  Scorpio:    {str:'Depth & Transformation',  wk:'Control & Obsession',       lesson:'trust is the final boss level and it unlocks everything after',     peak:'30-40',  chakra:'Sacral + Third Eye',   mantra:'Om Mangalaya Namah'},
+  Sagittarius:{str:'Wisdom & Freedom',        wk:'Commitment & Grounding',    lesson:'roots let you fly higher bestie, plant some',                      peak:'26-34',  chakra:'Solar Plexus + Crown', mantra:'Om Gurave Namah'},
+  Capricorn:  {str:'Discipline & Ambition',   wk:'Work-Life Balance',         lesson:'rest is part of the strategy and shani approves',                  peak:'35-45',  chakra:'Root + Crown',         mantra:'Om Shanaischaraya Namah'},
+  Aquarius:   {str:'Innovation & Vision',     wk:'Emotional Detachment',      lesson:'the revolution needs your heart too not just your brain',           peak:'27-35',  chakra:'Crown + Throat',       mantra:'Om Shanaischaraya Namah'},
+  Pisces:     {str:'Empathy & Creativity',    wk:'Boundaries & Groundedness', lesson:'your sensitivity is your gift but boundaries make it sustainable',  peak:'29-38',  chakra:'Third Eye + Crown',    mantra:'Om Gurave Namah'},
+};
+
+function renderLifePathChakra(sign, lifePath, birthYear) {
+  const lc = LIFE_CHAKRA[sign];
+  const z  = ZODIAC[sign];
+  const cn = getChineseZodiac(birthYear);
+  const nk = NAKSHATRA_MAP[sign];
+  const nm = NAKSHATRA_MEANING[sign];
+  const lpm = LIFE_PATH_MEANINGS[lifePath] || 'your numbers are cosmic and unique bestie ✨';
+
+  const chakraItems = [
+    { icon:'💪', label:'Core Strength',     val: lc.str    },
+    { icon:'🎯', label:'Growth Area',       val: lc.wk     },
+    { icon:'🌟', label:'Peak Life Years',   val: lc.peak   },
+    { icon:'🔮', label:'Active Chakras',    val: lc.chakra },
+    { icon:'🐉', label:'Chinese Zodiac',    val: cn        },
+    { icon:'🌙', label:'Nakshatra',         val: nk        },
+  ];
+
+  const lifeBars = [
+    { name:'Purpose Clarity',  pct:{Aries:70,Taurus:80,Gemini:65,Cancer:85,Leo:90,Virgo:78,Libra:72,Scorpio:88,Sagittarius:75,Capricorn:92,Aquarius:82,Pisces:86}[sign], color:'#a855f7' },
+    { name:'Resilience',       pct:{Aries:88,Taurus:85,Gemini:72,Cancer:78,Leo:82,Virgo:80,Libra:68,Scorpio:95,Sagittarius:80,Capricorn:90,Aquarius:75,Pisces:70}[sign], color:'#f5c842' },
+    { name:'Creative Power',   pct:{Aries:80,Taurus:75,Gemini:92,Cancer:72,Leo:95,Virgo:68,Libra:85,Scorpio:78,Sagittarius:82,Capricorn:65,Aquarius:90,Pisces:93}[sign], color:'#34d399' },
+    { name:'Spiritual Depth',  pct:{Aries:60,Taurus:70,Gemini:65,Cancer:90,Leo:72,Virgo:75,Libra:80,Scorpio:95,Sagittarius:85,Capricorn:68,Aquarius:82,Pisces:98}[sign], color:'#38bdf8' },
+  ];
+
+  let html = `<div class="nakshatra-box">
+    <h4>🌌 your nakshatra: ${nk}</h4>
+    <p>${nm}. your nakshatra gives you the cosmic software that runs underneath all your other personality traits. this explains so much about you fr.</p>
+  </div>`;
+
+  html += `<div class="chakra-grid">${chakraItems.map(c=>`
+    <div class="chakra-item">
+      <div class="ci-icon">${c.icon}</div>
+      <div class="ci-label">${c.label}</div>
+      <div class="ci-val">${c.val}</div>
+    </div>`).join('')}</div>`;
+
+  html += `<div class="life-bars">${lifeBars.map(b=>`
+    <div class="life-bar-row">
+      <div class="life-bar-name">${b.name}</div>
+      <div class="life-bar-track"><div class="life-bar-fill" style="width:${b.pct}%;background:${b.color}"></div></div>
+      <div class="life-bar-pct">${b.pct}%</div>
+    </div>`).join('')}</div>`;
+
+  html += `<div class="fin-tips" style="margin-top:16px">
+    <div class="fin-tip" style="border-left-color:var(--neon-purple)">
+      <div class="ft-icon">🧬</div>
+      <div class="ft-body">
+        <div class="ft-title">life path ${lifePath} — ${lpm.split('—')[0].trim()}</div>
+        <div class="ft-text">${lpm}</div>
+      </div>
+    </div>
+    <div class="fin-tip" style="border-left-color:var(--neon-green)">
+      <div class="ft-icon">📖</div>
+      <div class="ft-body">
+        <div class="ft-title">your cosmic life lesson (no skipping this)</div>
+        <div class="ft-text">${lc.lesson}. the universe literally designed your chart around learning this. peak era hits ${lc.peak}. you're either already in it or it's loading. 🔮</div>
+      </div>
+    </div>
+    <div class="fin-tip" style="border-left-color:var(--gold)">
+      <div class="ft-icon">🙏</div>
+      <div class="ft-body">
+        <div class="ft-title">your daily mantra (say it bestie)</div>
+        <div class="ft-text"><strong style="color:var(--gold-soft);font-size:1.1rem">${lc.mantra} 🕉️</strong><br>chant 108 times on ${z.day} for maximum cosmic effect. or just once before a big meeting. both valid.</div>
+      </div>
+    </div>
+  </div>`;
+
+  document.getElementById('lifePathChakra').innerHTML = html;
+}
 let lastReading = { name:'', sign:'' };
+let _apiKey = ''; // global key store — survives form hiding
 
 async function consult() {
   const name  = document.getElementById('uname').value.trim();
@@ -1267,7 +1449,8 @@ async function consult() {
 
   lastReading = { name, sign };
 
-  if (apiKey) localStorage.setItem('cgo_key', apiKey);
+  if (apiKey) { _apiKey = apiKey; localStorage.setItem('cgo_key', apiKey); }
+  else if (localStorage.getItem('cgo_key')) { _apiKey = localStorage.getItem('cgo_key'); }
 
   // show loading, hide others
   document.getElementById('consultBtn').disabled = true;
@@ -1281,6 +1464,8 @@ async function consult() {
   drawKundali(sign);
   renderLucky(sign, lp);
   renderMercury();
+  renderFinanceKundali(sign, lp);
+  renderLifePathChakra(sign, lp, year);
 
   try {
     if (currentMode === 'ai') {
@@ -1360,7 +1545,7 @@ window.addEventListener('DOMContentLoaded', ()=>{
     yearEl.appendChild(o);
   }
   const saved = localStorage.getItem('cgo_key');
-  if (saved) document.getElementById('ukey').value = saved;
+  if (saved) { document.getElementById('ukey').value = saved; _apiKey = saved; }
   setMode('ai');
 });
 </script>
@@ -1470,7 +1655,7 @@ async function sendChat() {
   const msg = input.value.trim();
   if (!msg) return;
 
-  const apiKey = document.getElementById('ukey').value.trim() || localStorage.getItem('cgo_key');
+  const apiKey = _apiKey || document.getElementById('ukey').value.trim() || localStorage.getItem('cgo_key');
 
   input.value = '';
   document.getElementById('chatSend').disabled = true;
