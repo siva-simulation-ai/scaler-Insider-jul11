@@ -8,20 +8,30 @@
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
-  --gold: #ffd700;
-  --neon-purple: #b44aff;
-  --neon-blue: #00d4ff;
-  --neon-green: #00ff9f;
-  --cosmic-dark: #04040f;
-  --card-bg: rgba(10, 10, 35, 0.85);
-  --glow-purple: 0 0 25px rgba(180,74,255,0.5);
-  --glow-gold: 0 0 25px rgba(255,215,0,0.4);
-  --glow-blue: 0 0 25px rgba(0,212,255,0.4);
+  --gold: #f5c842;
+  --gold-soft: #ffe89a;
+  --neon-purple: #a855f7;
+  --purple-soft: #d8b4fe;
+  --neon-blue: #38bdf8;
+  --blue-soft: #bae6fd;
+  --neon-green: #34d399;
+  --cosmic-dark: #0d0d1a;
+  --cosmic-mid: #13132a;
+  --card-bg: rgba(18, 18, 42, 0.92);
+  --text-main: #e8e8f8;
+  --text-muted: #9090b8;
+  --text-dim: #5a5a80;
+  --glow-purple: 0 4px 30px rgba(168,85,247,0.25);
+  --glow-gold:   0 4px 30px rgba(245,200,66,0.2);
+  --glow-blue:   0 4px 30px rgba(56,189,248,0.2);
+  --border-purple: rgba(168,85,247,0.3);
+  --border-gold:   rgba(245,200,66,0.3);
+  --border-blue:   rgba(56,189,248,0.25);
 }
 * { margin:0; padding:0; box-sizing:border-box; }
 body {
-  background: var(--cosmic-dark);
-  color: #e0e0ff;
+  background: linear-gradient(160deg, #0d0d1a 0%, #12102b 50%, #0d1a1f 100%);
+  color: var(--text-main);
   font-family: 'Rajdhani', sans-serif;
   min-height: 100vh;
   overflow-x: hidden;
@@ -42,7 +52,7 @@ body {
   font-size: 90px;
   display: block; margin-bottom: 18px;
   animation: float 3.5s ease-in-out infinite;
-  filter: drop-shadow(0 0 20px rgba(180,74,255,0.8));
+  filter: drop-shadow(0 0 18px rgba(168,85,247,0.6));
 }
 @keyframes float {
   0%,100% { transform: translateY(0); }
@@ -63,11 +73,11 @@ body {
   100% { background-position: 300% center; }
 }
 .hero .sub {
-  color: #8888bb; font-size: 1rem;
+  color: #9090b8; font-size: 1rem;
   margin-bottom: 6px;
 }
 .hero .tagline {
-  color: #555570; font-size: 0.8rem;
+  color: #6b6b8a; font-size: 0.8rem;
   font-style: italic; margin-bottom: 10px;
 }
 .badges {
@@ -75,8 +85,8 @@ body {
   gap: 10px; flex-wrap: wrap; margin-top: 15px;
 }
 .badge {
-  background: rgba(180,74,255,0.12);
-  border: 1px solid rgba(180,74,255,0.3);
+  background: rgba(168,85,247,0.12);
+  border: 1px solid rgba(168,85,247,0.28);
   border-radius: 20px; padding: 4px 14px;
   font-size: 0.75rem; color: var(--neon-purple);
   letter-spacing: 1px;
@@ -89,32 +99,32 @@ body {
 }
 .divider::before, .divider::after {
   content: ''; flex: 1; height: 1px;
-  background: linear-gradient(90deg, transparent, var(--neon-purple), transparent);
+  background: linear-gradient(90deg, transparent, rgba(168,85,247,0.4), transparent);
 }
 .divider span { color: var(--gold); font-size: 1.3rem; }
 
 /* ── CARDS ── */
 .card {
-  background: var(--card-bg);
-  border-radius: 20px;
+  background: linear-gradient(145deg, rgba(20,18,50,0.95), rgba(14,12,38,0.98));
+  border-radius: 22px;
   padding: 32px;
   margin-bottom: 24px;
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(16px);
 }
-.card.gold  { border:1px solid rgba(255,215,0,0.25);   box-shadow: var(--glow-gold); }
-.card.purple{ border:1px solid rgba(180,74,255,0.3);   box-shadow: var(--glow-purple); }
-.card.blue  { border:1px solid rgba(0,212,255,0.25);   box-shadow: var(--glow-blue); }
-.card.red   { border:1px solid rgba(255,80,0,0.3);     box-shadow: 0 0 25px rgba(255,80,0,0.2); }
+.card.gold  { border:1px solid rgba(245,200,66,0.28);  box-shadow: 0 4px 30px rgba(245,200,66,0.1), 0 1px 0 rgba(245,200,66,0.08) inset; }
+.card.purple{ border:1px solid rgba(168,85,247,0.28);  box-shadow: 0 4px 30px rgba(168,85,247,0.1), 0 1px 0 rgba(168,85,247,0.06) inset; }
+.card.blue  { border:1px solid rgba(56,189,248,0.25);  box-shadow: 0 4px 30px rgba(56,189,248,0.08), 0 1px 0 rgba(56,189,248,0.06) inset; }
+.card.red   { border:1px solid rgba(251,113,50,0.28);  box-shadow: 0 4px 30px rgba(251,113,50,0.1); }
 .card h2 {
   font-family: 'Cinzel', serif;
-  font-size: 1.25rem;
+  font-size: 1.2rem;
   margin-bottom: 22px;
   display: flex; align-items: center; gap: 10px;
 }
-.card.gold h2    { color: var(--gold); }
-.card.purple h2  { color: var(--neon-purple); }
-.card.blue h2    { color: var(--neon-blue); }
-.card.red h2     { color: #ff7040; }
+.card.gold h2    { color: var(--gold-soft); }
+.card.purple h2  { color: var(--purple-soft); }
+.card.blue h2    { color: var(--blue-soft); }
+.card.red h2     { color: #fca884; }
 
 /* ── FORM ── */
 .form-grid {
@@ -127,19 +137,19 @@ body {
 .fg label {
   font-size: 0.75rem; font-weight: 700;
   letter-spacing: 1.5px; text-transform: uppercase;
-  color: var(--neon-blue);
+  color: var(--blue-soft);
 }
 .fg input {
-  background: rgba(0,0,25,0.7);
+  background: rgba(10,8,30,0.7);
   border: 1px solid rgba(0,212,255,0.25);
   border-radius: 10px; padding: 12px 15px;
-  color: #e0e0ff; font-size: 0.95rem;
+  color: var(--text-main); font-size: 0.95rem;
   font-family: 'Rajdhani', sans-serif;
   outline: none; transition: all 0.3s;
 }
-.fg input:focus { border-color: var(--neon-purple); box-shadow: var(--glow-purple); }
-.fg input::placeholder { color: #303050; }
-.fg .hint { font-size: 0.7rem; color: #505070; }
+.fg input:focus { border-color: var(--neon-purple); box-shadow: 0 0 0 3px rgba(168,85,247,0.12); }
+.fg input::placeholder { color: #3a3a5c; }
+.fg .hint { font-size: 0.7rem; color: #5a5a80; }
 .fg .hint a { color: var(--neon-blue); text-decoration: none; }
 
 /* ── MODE SELECTOR ── */
@@ -147,13 +157,13 @@ body {
 .mode-btn {
   flex:1; padding: 10px; border-radius: 10px;
   border: 1px solid rgba(255,255,255,0.08);
-  background: rgba(0,0,25,0.5); color: #888;
+  background: rgba(10,8,30,0.5); color: var(--text-muted);
   cursor: pointer; font-size: 0.85rem;
   font-family: 'Rajdhani', sans-serif;
   transition: all 0.3s; text-align: center;
 }
 .mode-btn.on {
-  border-color: var(--neon-purple);
+  border-color: var(--purple-soft);
   color: var(--neon-purple);
   background: rgba(180,74,255,0.1);
 }
@@ -163,7 +173,7 @@ body {
 /* ── BUTTON ── */
 .cosmic-btn {
   width: 100%; padding: 16px; margin-top: 22px;
-  background: linear-gradient(135deg, #4400cc, #b44aff, #00a8cc);
+  background: linear-gradient(135deg, #7c3aed, #a855f7, #06b6d4);
   border: none; border-radius: 12px;
   color: white; font-family: 'Cinzel', serif;
   font-size: 1.05rem; font-weight: 700;
@@ -178,7 +188,7 @@ body {
   transition: left 0.6s;
 }
 .cosmic-btn:hover::after { left: 100%; }
-.cosmic-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 35px rgba(180,74,255,0.5); }
+.cosmic-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 35px rgba(168,85,247,0.4); }
 .cosmic-btn:disabled { opacity:0.5; cursor:not-allowed; transform:none; }
 
 /* ── LOADING ── */
@@ -187,17 +197,17 @@ body {
 .orb {
   width:110px; height:110px; border-radius:50%;
   margin: 0 auto 28px;
-  background: radial-gradient(circle at 30% 30%, var(--neon-purple), #3300aa, #080018);
+  background: radial-gradient(circle at 30% 30%, var(--neon-purple), #4c1d95, #0d0820);
   animation: pulse 2s ease-in-out infinite;
-  box-shadow: 0 0 40px var(--neon-purple), 0 0 80px rgba(180,74,255,0.3);
+  box-shadow: 0 0 40px var(--neon-purple), 0 0 80px rgba(168,85,247,0.28);
 }
 @keyframes pulse {
   0%,100% { transform:scale(1); box-shadow: 0 0 40px var(--neon-purple); }
-  50%      { transform:scale(1.12); box-shadow: 0 0 80px var(--neon-purple), 0 0 140px rgba(180,74,255,0.3); }
+  50%      { transform:scale(1.12); box-shadow: 0 0 80px var(--neon-purple), 0 0 140px rgba(168,85,247,0.28); }
 }
 .orb-ring {
   width:140px; height:140px; border-radius:50%;
-  border: 1px solid rgba(180,74,255,0.3);
+  border: 1px solid rgba(168,85,247,0.28);
   position: absolute; top:-15px; left:-15px;
   animation: spin 6s linear infinite;
 }
@@ -207,7 +217,7 @@ body {
   font-family: 'Cinzel', serif; color: var(--gold);
   font-size: 1.15rem; margin-bottom: 8px;
 }
-#loadSub { color:#555570; font-size:0.9rem; }
+#loadSub { color:#8080a8; font-size:0.9rem; }
 
 /* ── RESULTS ── */
 #results { display:none; }
@@ -220,7 +230,7 @@ body {
 }
 .zodiac-orb {
   width: 90px; height: 90px; border-radius: 50%;
-  background: linear-gradient(135deg, #1a0050, #6600cc);
+  background: linear-gradient(135deg, #1e1048, #5b21b6);
   display: flex; align-items: center; justify-content: center;
   font-size: 2.6rem; flex-shrink: 0;
   border: 2px solid var(--gold);
@@ -228,9 +238,9 @@ body {
 }
 .profile-info h3 {
   font-family: 'Cinzel', serif;
-  color: var(--gold); font-size: 1.5rem;
+  color: var(--gold-soft); font-size: 1.5rem;
 }
-.profile-info p { color: #8888bb; font-size: 0.9rem; margin-top: 4px; }
+.profile-info p { color: #9090b8; font-size: 0.9rem; margin-top: 4px; }
 
 .stats-grid {
   display: grid;
@@ -238,18 +248,18 @@ body {
   gap: 12px;
 }
 .stat {
-  background: rgba(0,0,25,0.6);
+  background: rgba(16,14,40,0.6);
   border: 1px solid rgba(0,212,255,0.15);
   border-radius: 12px; padding: 14px 10px;
   text-align: center;
 }
 .stat .s-icon { font-size: 1.8rem; margin-bottom: 4px; }
 .stat .s-label {
-  font-size: 0.65rem; color: var(--neon-blue);
+  font-size: 0.65rem; color: var(--blue-soft);
   text-transform: uppercase; letter-spacing: 1px;
 }
 .stat .s-val {
-  font-family: 'Cinzel', serif; color: var(--gold);
+  font-family: 'Cinzel', serif; color: var(--gold-soft);
   font-size: 0.95rem; margin-top: 3px;
 }
 
@@ -262,19 +272,19 @@ body {
 
 /* Reading sections */
 .r-section {
-  border-left: 3px solid var(--neon-purple);
+  border-left: 3px solid rgba(168,85,247,0.7);
   border-radius: 0 10px 10px 0;
   padding: 14px 18px; margin-bottom: 14px;
-  background: rgba(0,0,25,0.4);
+  background: rgba(16,14,40,0.5);
   transition: border-color 0.3s;
 }
-.r-section:hover { border-color: var(--gold); }
+.r-section:hover { border-color: var(--gold-soft); }
 .r-section h4 {
   font-family: 'Cinzel', serif; color: var(--gold);
   margin-bottom: 8px; font-size: 1rem;
   display: flex; align-items: center; gap: 8px;
 }
-.r-section p { color: #b0b0d0; line-height: 1.75; font-size: 0.95rem; }
+.r-section p { color: #c0c0e0; line-height: 1.75; font-size: 0.95rem; }
 
 /* Lucky grid */
 .lucky-grid {
@@ -290,10 +300,10 @@ body {
 }
 .lucky-item .l-icon { font-size: 2rem; margin-bottom: 4px; }
 .lucky-item .l-lbl {
-  font-size: 0.62rem; color: var(--neon-blue);
+  font-size: 0.62rem; color: var(--blue-soft);
   text-transform: uppercase; letter-spacing: 1px;
 }
-.lucky-item .l-val { color: var(--gold); font-weight: 700; font-size: 0.95rem; margin-top: 3px; }
+.lucky-item .l-val { color: var(--gold-soft); font-weight: 700; font-size: 0.95rem; margin-top: 3px; }
 
 /* Share */
 .share-row {
@@ -315,20 +325,20 @@ body {
 
 .reset-btn {
   background: transparent;
-  border: 1px solid rgba(180,74,255,0.4);
+  border: 1px solid rgba(168,85,247,0.35);
   color: var(--neon-purple); padding: 9px 28px;
   border-radius: 8px; cursor: pointer;
   font-family: 'Cinzel', serif; font-size: 0.85rem;
   margin-top: 12px; transition: all 0.3s; display: block; margin: 12px auto 0;
 }
-.reset-btn:hover { background: rgba(180,74,255,0.08); }
+.reset-btn:hover { background: rgba(168,85,247,0.08); }
 
 /* Footer */
 footer {
   text-align: center; padding: 28px;
-  color: #30305050; font-size: 0.75rem;
+  color: #3a3a5c50; font-size: 0.75rem;
   border-top: 1px solid rgba(255,255,255,0.04);
-  margin-top: 10px; color: #404060;
+  margin-top: 10px; color: #6060a0;
 }
 footer a { color: var(--neon-blue); text-decoration: none; }
 
@@ -336,12 +346,12 @@ footer a { color: var(--neon-blue); text-decoration: none; }
 #chatFab {
   position: fixed; bottom: 28px; right: 28px; z-index: 999;
   width: 62px; height: 62px; border-radius: 50%;
-  background: linear-gradient(135deg, #6600cc, #b44aff);
+  background: linear-gradient(135deg, #7c3aed, #c084fc);
   border: none; cursor: pointer; font-size: 1.8rem;
-  box-shadow: 0 4px 20px rgba(180,74,255,0.6);
+  box-shadow: 0 4px 20px rgba(168,85,247,0.45);
   transition: all 0.3s; display: flex; align-items: center; justify-content: center;
 }
-#chatFab:hover { transform: scale(1.12); box-shadow: 0 6px 30px rgba(180,74,255,0.8); }
+#chatFab:hover { transform: scale(1.12); box-shadow: 0 6px 30px rgba(168,85,247,0.55); }
 #chatFab .fab-badge {
   position: absolute; top: -4px; right: -4px;
   background: var(--gold); color: #000; font-size: 0.55rem;
@@ -352,7 +362,7 @@ footer a { color: var(--neon-blue); text-decoration: none; }
   position: fixed; bottom: 105px; right: 28px; z-index: 998;
   width: 360px; max-width: calc(100vw - 40px);
   background: rgba(6,6,28,0.97);
-  border: 1px solid rgba(180,74,255,0.35);
+  border: 1px solid rgba(168,85,247,0.3);
   border-radius: 20px;
   box-shadow: 0 12px 50px rgba(0,0,0,0.7), var(--glow-purple);
   display: none; flex-direction: column;
@@ -365,14 +375,14 @@ footer a { color: var(--neon-blue); text-decoration: none; }
 }
 #chatBox.open { display: flex; }
 #chatHeader {
-  background: linear-gradient(135deg, #2a0066, #5500aa);
+  background: linear-gradient(135deg, #2a0066, #6d28d9);
   padding: 14px 18px; display: flex;
   align-items: center; justify-content: space-between;
 }
 #chatHeader .ch-info { display: flex; align-items: center; gap: 10px; }
 #chatHeader .ch-avatar {
   width: 38px; height: 38px; border-radius: 50%;
-  background: linear-gradient(135deg, #b44aff, #ffd700);
+  background: linear-gradient(135deg, #c084fc, #fcd34d);
   display: flex; align-items: center; justify-content: center;
   font-size: 1.3rem;
 }
@@ -401,19 +411,19 @@ footer a { color: var(--neon-blue); text-decoration: none; }
   font-size: 0.88rem; line-height: 1.55;
 }
 .msg.bot .bubble {
-  background: rgba(180,74,255,0.12);
-  border: 1px solid rgba(180,74,255,0.25);
-  color: #d0d0f0; border-bottom-left-radius: 4px;
+  background: rgba(168,85,247,0.12);
+  border: 1px solid rgba(168,85,247,0.22);
+  color: #dcdcf8; border-bottom-left-radius: 4px;
 }
 .msg.user .bubble {
-  background: linear-gradient(135deg, #3300aa, #6600cc);
+  background: linear-gradient(135deg, #4c1d95, #5b21b6);
   color: white; border-bottom-right-radius: 4px;
 }
 .msg .av {
   width: 28px; height: 28px; border-radius: 50%;
   flex-shrink: 0; display: flex; align-items: center;
   justify-content: center; font-size: 1rem;
-  background: rgba(180,74,255,0.15);
+  background: rgba(168,85,247,0.15);
 }
 .msg.user .av { background: rgba(255,215,0,0.1); }
 .typing-dots span {
@@ -432,31 +442,31 @@ footer a { color: var(--neon-blue); text-decoration: none; }
   flex-wrap: wrap;
 }
 .sug-btn {
-  background: rgba(180,74,255,0.08);
-  border: 1px solid rgba(180,74,255,0.25);
+  background: rgba(168,85,247,0.08);
+  border: 1px solid rgba(168,85,247,0.22);
   border-radius: 20px; padding: 5px 12px;
   font-size: 0.72rem; color: var(--neon-purple);
   cursor: pointer; font-family: 'Rajdhani', sans-serif;
   transition: all 0.2s; white-space: nowrap;
 }
-.sug-btn:hover { background: rgba(180,74,255,0.18); color: white; }
+.sug-btn:hover { background: rgba(168,85,247,0.18); color: white; }
 #chatInputRow {
   display: flex; gap: 8px; padding: 12px 14px;
-  border-top: 1px solid rgba(180,74,255,0.15);
+  border-top: 1px solid rgba(168,85,247,0.15);
 }
 #chatInput {
-  flex: 1; background: rgba(0,0,20,0.8);
-  border: 1px solid rgba(180,74,255,0.2);
+  flex: 1; background: rgba(8,6,25,0.8);
+  border: 1px solid rgba(168,85,247,0.2);
   border-radius: 10px; padding: 10px 14px;
-  color: #e0e0ff; font-size: 0.88rem;
+  color: var(--text-main); font-size: 0.88rem;
   font-family: 'Rajdhani', sans-serif; outline: none;
   transition: border-color 0.3s;
 }
 #chatInput:focus { border-color: var(--neon-purple); }
-#chatInput::placeholder { color: #404060; }
+#chatInput::placeholder { color: #4a4a70; }
 #chatSend {
   width: 40px; height: 40px; border-radius: 10px;
-  background: linear-gradient(135deg, #5500aa, #b44aff);
+  background: linear-gradient(135deg, #6d28d9, #a855f7);
   border: none; cursor: pointer; font-size: 1.1rem;
   transition: all 0.2s; flex-shrink: 0;
   display: flex; align-items: center; justify-content: center;
@@ -468,7 +478,7 @@ footer a { color: var(--neon-blue); text-decoration: none; }
   border: 1px solid rgba(255,215,0,0.08);
   border-radius: 10px; padding: 12px;
   margin-bottom: 28px; font-size: 0.72rem;
-  color: #50504040; text-align: center; color: #505040;
+  color: #70708040; text-align: center; color: #505040;
 }
 
 @media (max-width:600px) {
@@ -480,6 +490,104 @@ footer a { color: var(--neon-blue); text-decoration: none; }
 ::-webkit-scrollbar { width: 5px; }
 ::-webkit-scrollbar-track { background: #0a0a1a; }
 ::-webkit-scrollbar-thumb { background: #4a0088; border-radius: 3px; }
+
+/* ── FINANCE KUNDALI ── */
+.fin-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 14px; margin-bottom: 18px;
+}
+.fin-item {
+  background: rgba(255,215,0,0.04);
+  border: 1px solid rgba(255,215,0,0.18);
+  border-radius: 14px; padding: 16px 12px; text-align: center;
+  transition: all 0.3s;
+}
+.fin-item:hover { border-color: var(--gold); background: rgba(255,215,0,0.08); }
+.fin-item .fi-icon { font-size: 2rem; margin-bottom: 6px; }
+.fin-item .fi-label {
+  font-size: 0.65rem; color: var(--gold);
+  text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;
+}
+.fin-item .fi-val {
+  font-family: 'Cinzel', serif; color: white;
+  font-size: 0.9rem; font-weight: 700;
+}
+.fin-item .fi-sub { font-size: 0.72rem; color: #6a6a90; margin-top: 3px; }
+.wealth-bar-wrap { margin: 20px 0 10px; }
+.wealth-bar-label {
+  display: flex; justify-content: space-between;
+  font-size: 0.75rem; color: #8888aa; margin-bottom: 5px;
+}
+.wealth-bar-track {
+  height: 8px; background: rgba(255,255,255,0.05);
+  border-radius: 4px; overflow: hidden;
+}
+.wealth-bar-fill {
+  height: 100%; border-radius: 4px;
+  background: linear-gradient(90deg, #f5c842, #ff9500);
+  transition: width 1.2s ease;
+}
+.fin-tips { display: flex; flex-direction: column; gap: 10px; margin-top: 14px; }
+.fin-tip {
+  display: flex; gap: 12px; align-items: flex-start;
+  background: rgba(10,8,30,0.4);
+  border-left: 3px solid var(--gold);
+  border-radius: 0 10px 10px 0;
+  padding: 12px 14px;
+}
+.fin-tip .ft-icon { font-size: 1.4rem; flex-shrink: 0; margin-top: 2px; }
+.fin-tip .ft-body {}
+.fin-tip .ft-title {
+  font-family: 'Cinzel', serif; color: var(--gold);
+  font-size: 0.82rem; margin-bottom: 3px;
+}
+.fin-tip .ft-text { font-size: 0.85rem; color: #c0c0e0; line-height: 1.6; }
+
+/* ── LIFE PATH CHAKRA ── */
+.chakra-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px; margin-bottom: 20px;
+}
+.chakra-item {
+  background: rgba(0,212,255,0.04);
+  border: 1px solid rgba(0,212,255,0.15);
+  border-radius: 14px; padding: 14px 10px; text-align: center;
+  transition: all 0.3s;
+}
+.chakra-item:hover { border-color: var(--neon-blue); background: rgba(0,212,255,0.08); }
+.chakra-item .ci-icon { font-size: 1.8rem; margin-bottom: 6px; }
+.chakra-item .ci-label {
+  font-size: 0.63rem; color: var(--neon-blue);
+  text-transform: uppercase; letter-spacing: 1px;
+}
+.chakra-item .ci-val {
+  font-family: 'Cinzel', serif; color: white;
+  font-size: 0.88rem; margin-top: 4px;
+}
+.nakshatra-box {
+  background: rgba(0,212,255,0.04);
+  border: 1px solid rgba(0,212,255,0.15);
+  border-radius: 14px; padding: 18px; margin-bottom: 14px;
+}
+.nakshatra-box h4 {
+  font-family: 'Cinzel', serif; color: var(--neon-blue);
+  margin-bottom: 8px; font-size: 0.95rem;
+}
+.nakshatra-box p { color: #c0c0e0; font-size: 0.88rem; line-height: 1.7; }
+.life-bars { display: flex; flex-direction: column; gap: 10px; margin-top: 16px; }
+.life-bar-row { display: flex; align-items: center; gap: 12px; }
+.life-bar-name { font-size: 0.75rem; color: #8888aa; width: 100px; flex-shrink: 0; }
+.life-bar-track {
+  flex: 1; height: 7px; background: rgba(255,255,255,0.05);
+  border-radius: 4px; overflow: hidden;
+}
+.life-bar-fill {
+  height: 100%; border-radius: 4px;
+  transition: width 1.4s ease;
+}
+.life-bar-pct { font-size: 0.72rem; color: #6a6a90; width: 32px; text-align: right; flex-shrink: 0; }
 </style>
 </head>
 <body>
@@ -520,10 +628,10 @@ footer a { color: var(--neon-blue); text-decoration: none; }
       <div class="fg" style="grid-column: span 2;">
         <label>🎂 Date of Birth</label>
         <div style="display:flex; gap:8px;">
-          <select id="uday" style="flex:1; background:rgba(0,0,25,0.7); border:1px solid rgba(0,212,255,0.25); border-radius:10px; padding:12px 8px; color:#e0e0ff; font-size:0.95rem; font-family:'Rajdhani',sans-serif; outline:none;">
+          <select id="uday" style="flex:1; background:rgba(10,8,30,0.7); border:1px solid rgba(56,189,248,0.25); border-radius:10px; padding:12px 8px; color:#e8e8f8; font-size:0.95rem; font-family:'Rajdhani',sans-serif; outline:none;">
             <option value="">Day</option>
           </select>
-          <select id="umonth" style="flex:1.4; background:rgba(0,0,25,0.7); border:1px solid rgba(0,212,255,0.25); border-radius:10px; padding:12px 8px; color:#e0e0ff; font-size:0.95rem; font-family:'Rajdhani',sans-serif; outline:none;">
+          <select id="umonth" style="flex:1.4; background:rgba(10,8,30,0.7); border:1px solid rgba(56,189,248,0.25); border-radius:10px; padding:12px 8px; color:#e8e8f8; font-size:0.95rem; font-family:'Rajdhani',sans-serif; outline:none;">
             <option value="">Month</option>
             <option value="1">January</option><option value="2">February</option>
             <option value="3">March</option><option value="4">April</option>
@@ -532,13 +640,13 @@ footer a { color: var(--neon-blue); text-decoration: none; }
             <option value="9">September</option><option value="10">October</option>
             <option value="11">November</option><option value="12">December</option>
           </select>
-          <select id="uyear" style="flex:1.2; background:rgba(0,0,25,0.7); border:1px solid rgba(0,212,255,0.25); border-radius:10px; padding:12px 8px; color:#e0e0ff; font-size:0.95rem; font-family:'Rajdhani',sans-serif; outline:none;">
+          <select id="uyear" style="flex:1.2; background:rgba(10,8,30,0.7); border:1px solid rgba(56,189,248,0.25); border-radius:10px; padding:12px 8px; color:#e8e8f8; font-size:0.95rem; font-family:'Rajdhani',sans-serif; outline:none;">
             <option value="">Year</option>
           </select>
         </div>
       </div>
       <div class="fg">
-        <label>⏰ Time of Birth <span style="color:#404060">(optional)</span></label>
+        <label>⏰ Time of Birth <span style="color:#4a4a70">(optional)</span></label>
         <input type="time" id="utime" placeholder="HH:MM">
       </div>
       <div class="fg">
@@ -563,8 +671,8 @@ footer a { color: var(--neon-blue); text-decoration: none; }
       <div class="orb-ring"></div>
       <div class="orb"></div>
     </div>
-    <div id="loadMsg">Consulting the Ancient Algorithms…</div>
-    <div id="loadSub">Narada Muni is checking your stars. Zeus is reviewing your karma. GPT is debugging your destiny.</div>
+    <div id="loadMsg">bestie hold on the stars are loading… 🔮</div>
+    <div id="loadSub">narada muni is literally speed-running your karma report rn. please be patient bestie.</div>
   </div>
 
   <!-- RESULTS -->
@@ -578,7 +686,7 @@ footer a { color: var(--neon-blue); text-decoration: none; }
         <div class="profile-info">
           <h3 id="profileName">—</h3>
           <p id="profileSub">—</p>
-          <p id="profileDates" style="color:#606080;font-size:0.8rem;margin-top:2px">—</p>
+          <p id="profileDates" style="color:#6a6a90;font-size:0.8rem;margin-top:2px">—</p>
         </div>
       </div>
       <div class="stats-grid" id="statsGrid"></div>
@@ -592,7 +700,7 @@ footer a { color: var(--neon-blue); text-decoration: none; }
           <!-- drawn by JS -->
         </svg>
       </div>
-      <p style="text-align:center;color:#404060;font-size:0.75rem;margin-top:8px">
+      <p style="text-align:center;color:#4a4a70;font-size:0.75rem;margin-top:8px">
         North Indian style • Houses based on approximate Lagna
       </p>
     </div>
@@ -601,6 +709,18 @@ footer a { color: var(--neon-blue); text-decoration: none; }
     <div class="card purple">
       <h2>🧙‍♂️ The Oracle Speaks</h2>
       <div id="oracleReading"></div>
+    </div>
+
+    <!-- Finance Kundali -->
+    <div class="card gold">
+      <h2>💰 Finance Kundali — Cosmic Wealth Map</h2>
+      <div id="financeKundali"></div>
+    </div>
+
+    <!-- Life Path Chakra -->
+    <div class="card blue">
+      <h2>🌀 Life Path Chakra — Your Cosmic Blueprint</h2>
+      <div id="lifePathChakra"></div>
     </div>
 
     <!-- Lucky Dashboard -->
@@ -613,7 +733,7 @@ footer a { color: var(--neon-blue); text-decoration: none; }
     <div class="card red">
       <h2>⚠️ Mercury Retrograde Alert™</h2>
       <div class="r-section" style="border-color:#ff7040;">
-        <p id="mercuryText" style="color:#c07050;line-height:1.75;"></p>
+        <p id="mercuryText" style="color:#e08858;line-height:1.75;"></p>
       </div>
     </div>
 
@@ -671,7 +791,7 @@ footer a { color: var(--neon-blue); text-decoration: none; }
       if (Math.random() < 0.005) s.d *= -1;
       ctx.beginPath();
       ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(180,180,255,${s.o})`;
+      ctx.fillStyle = `rgba(200,185,255,${s.o})`;
       ctx.fill();
     });
     requestAnimationFrame(draw);
@@ -719,26 +839,86 @@ const LIFE_PATH_MEANINGS = {
 };
 
 const MERCURY_WARNINGS = [
-  "Mercury Retrograde is basically your life doing a git revert. Avoid signing contracts, buying electronics, or sending passive-aggressive emails. Back up your data AND your emotions.",
-  "Mercury, that tiny drama queen of a planet, goes retrograde soon. Your texts will be misread, your GPS will malfunction, and your ex WILL text you. You have been warned.",
-  "Mercury Retrograde is the universe's scheduled maintenance window. No new projects, no new relationships, no new haircuts. Just sit quietly and chant OM.",
-  "Alert: Mercury is in retrograde and acting like a startup in a down round. Communication crashes incoming. Triple-read all messages before sending. Preferably four times.",
-  "Mercury Retrograde is basically when the universe runs on legacy code. Expect delays, misunderstandings, and your chai going cold immediately after making it."
+  "bestie, Mercury Retrograde just said 'not today' to your whole life 💀 your texts are going to hit different (wrong), your ex is about to slide in, and your laptop WILL crash at the worst moment. no new situationships. no big purchases. just vibe and survive. slay.",
+  "okay so Mercury Retrograde is literally the universe's way of going on a Roman holiday and leaving YOU to deal with the consequences. communication is cooked rn. read receipts are a trap. triple-check every email before sending or catch the L. you've been warned bestie 🪐",
+  "Mercury said 'i'm so done with you all' and went backward. iconic of him. now your plans will flop, your WiFi will die during the most important call, and someone from your past WILL reappear. stay calm, don't make big moves, and honestly? touch grass. 🌿",
+  "not Mercury Retrograde ruining your situationship AND your career at the same time 😭 this planet said chaos era and meant it. avoid signing anything, starting new projects, or having 'the talk' with anyone. just romanticize your existing life for 3 weeks.",
+  "Mercury Retrograde is giving main character villain arc rn. the universe is literally running on buggy code and you're the beta tester. back up your files, your feelings, AND your relationships. this too shall pass but first it's gonna be unhinged. godspeed 🫡"
 ];
 
 const OFFLINE_READINGS = {
-  Aries:       { life:"Aries — the cosmic startup founder who ships before thinking. You are the first sign of the zodiac, which means the universe beta-tested life with YOU. Chaotic? Yes. Brilliant? Also yes. Lord Kartikeya rides a peacock and holds a spear — you basically do the same, but in your meetings.", money:"Lakshmi smiles at your hustle, but Zeus raises an eyebrow at your impulse buys. Your wealth strategy: FIRE fast, FAIL fast, EARN faster. Invest in things that excite you — just maybe not at 2am. Lucky investment sector: anything that moves fast.", career:"Lord of Mars means you're built for action, not paperwork. Best careers: Entrepreneur, Surgeon, Soldier, or that person who replies to emails in under 30 seconds. Your AI career tip: Build AI agents. You were born to deploy, not just discuss.", love:"You love HARD and leave FAST. Compatible with: Leos (equally dramatic) and Sagittarius (will keep up with you). Warning: Taurus will make you slow down. This will annoy you. Deeply." },
-  Taurus:      { life:"Taurus — the universe's luxury product manager. You take your time, but when you arrive, you ARRIVE. Lakshmi literally has Taurus energy: beautiful, abundant, calm. You are the person who turns a basic desk into a productivity shrine.", money:"Shukra (Venus) governs your finances. Translation: you ATTRACT money naturally, but also spend it on beautiful things. Rule: For every splurge, invest twice. Your portfolio should be as beautiful as your home. Real estate, gold, and long-term SIPs are your cosmic portfolio.", career:"Stubbornness is just commitment with good PR. You excel in: Finance, Architecture, AI product design, or anything that requires patience and an eye for quality. You will outlast every trend.", love:"You are a loyal, slow-burning love. Compatible with: Virgo (appreciates your taste) and Capricorn (shares your ambition). Warning: Gemini will exhaust you. Just block them preemptively." },
-  Gemini:      { life:"Gemini — two personalities for the price of one! The universe created you because it needed someone to do five things at once and explain it to everyone else. Saraswati blessed you with words. Mercury gave you speed. Use both responsibly.", money:"Your money comes in FAST and goes out FASTER. The solution: automate your savings before your brain decides to 'invest' in that new gadget. Multiple income streams suit you perfectly — freelance, side projects, and your ability to sell literally anything.", career:"You were born for the AI era. Prompting, content creation, sales, consulting, teaching — you do it all. Your superpower: explaining complex things simply. In tech: AI product manager, developer advocate, or the person who writes the README everyone actually reads.", love:"You need intellectual stimulation or you'll ghost. Compatible with: Aquarius (matches your weirdness) and Libra (can keep up with your monologues). Warning: Scorpio will try to understand all your personalities. This will end in drama." },
-  Cancer:      { life:"Cancer — the moon's favourite child. Chandra (Moon) rules you, which means you feel EVERYTHING at 1000% intensity. You are deeply intuitive, fiercely protective, and you cry at ads about puppies. This is a superpower, not a weakness.", money:"Your relationship with money is emotional — you save to feel SAFE. Wise Cancer! Build a financial fortress: emergency fund first, investments second, luxury third. Your intuition about people makes you excellent at spotting good business partners.", career:"Home, family, and security themes drive you. Best fits: Data Science (patterns feel like instincts), UX Research (you understand humans deeply), or founding a company that genuinely helps people. Your AI niche: healthcare AI, mental health apps.", love:"You love with your whole chest. Compatible with: Scorpio (equally intense) and Pisces (will appreciate your depths). Warning: Aries will rush you. Let them try." },
-  Leo:         { life:"Leo — the sun itself showed up and said 'I want a human avatar.' You are the main character in every room, and everyone knows it. Lord Vishnu, the preserver of the universe, is your cosmic patron. Regal energy only.", money:"Apollo drives a chariot of gold — so should your portfolio. You spend lavishly AND earn lavishly. The key: channel that Leo generosity into INVESTMENTS, not just vibes. You are excellent at pitching — your face alone has raised seed rounds.", career:"You were born to lead, present, and inspire. CEO, Actor, Public Speaker, or the dev who demos features and somehow makes sorting algorithms look exciting. In AI: You should be on stage talking about AI, not hiding behind a terminal.", love:"You love grandly. Compatible with: Aries (matches your fire) and Sagittarius (will worship you appropriately). Warning: Capricorn will give you a spreadsheet of relationship KPIs. You will find this both annoying and oddly attractive." },
-  Virgo:       { life:"Virgo — the universe's QA engineer. You noticed the typo in this reading already, didn't you? Athena and Saraswati co-bless you with wisdom and precision. You are the person everyone calls when things go wrong — and things always go right when you're in charge.", money:"You are EXCELLENT with money. You research before buying. You read the fine print. You have a budget. Shani (Saturn) respects this. Your only flaw: analysis paralysis. Sometimes, just buy the index fund and stop reading about it.", career:"Born for: Data Analysis, AI/ML Engineering, Medical research, or that person who writes the actual documentation that saves entire projects. Your code has comments. Bless you.", love:"You love carefully and completely. Compatible with: Taurus (earthy stability) and Capricorn (shares your work ethic). Warning: Sagittarius will call you 'too cautious.' They are wrong." },
-  Libra:       { life:"Libra — the cosmic diplomat holding the scales of justice while also trying to decide what to eat for lunch. Themis and Lakshmi both bless you with fairness and beauty. You are the most aesthetically gifted sign in the zodiac. Rooms look better when you walk in.", money:"Venus blesses your finances, but your indecision can delay wealth. Solution: Set financial decisions on a timer. You have 24 hours to decide, then you commit. Pair with a Capricorn for financial accountability and watch your bank account glow up.", career:"Law, Design, UX/UI, Diplomacy, AI Ethics (yes, this is a real job!), or brand strategy. You make everything look and feel better. Your negotiation skills are worth six figures minimum.", love:"You are the most romantic sign. Compatible with: Gemini (intellectual spark) and Aquarius (deep friendship first). Warning: You will take forever to decide if you like someone. They'll figure it out before you do." },
-  Scorpio:     { life:"Scorpio — the universe's investigative journalist crossed with a data scientist. Lord Shiva and Hades both claim you. You see through people instantly, which is both a gift and a burden at dinner parties. You are the most intense sign in the zodiac, and you KNOW it.", money:"Pluto and Mars make you a financial warrior. You are built for high-risk, high-reward. Crypto, startups, deep value investing — these suit you. Warning: Your all-or-nothing nature can lead to big wins OR dramatic losses. Diversify, even if it feels like cheating.", career:"Investigator, Surgeon, Intelligence Analyst, Cybersecurity Expert, or the ML Engineer who finds data patterns that everyone else missed. You never do anything halfway. This is your greatest asset.", love:"You love with terrifying depth. Compatible with: Cancer (matches your intensity) and Pisces (appreciates your emotional depth). Warning: Gemini will confuse you. This will intrigue you. This is how the drama starts." },
-  Sagittarius: { life:"Sagittarius — the universe's philosopher-adventurer who accidentally became a stand-up comedian. Zeus and Brahma are your patrons — creator and king of gods. Big energy. Big dreams. Big jokes. You were born to explore, learn, and inspire.", money:"Jupiter expands everything it touches — including your income AND your expenses. Your money philosophy: earn big, live big, but for the love of Lakshmi, SAVE something. Your best investment: yourself. Certifications, courses, travel that builds skills.", career:"Teacher, Philosopher, Travel Influencer, Startup Founder, International Business, or the AI researcher who publishes papers AND has a great Twitter/X presence. You need freedom in your work. Remote-first companies were invented for you.", love:"You need intellectual AND physical adventure. Compatible with: Aries (keeps up with you) and Leo (matches your energy). Warning: Virgo will make a pros/cons list about dating you. You will find this hilarious." },
-  Capricorn:   { life:"Capricorn — the universe's CEO who has been working since birth. Lord Shani (Saturn) is both your greatest teacher and your personal trainer from hell. He only gives you what you've EARNED, no exceptions. You are the sign of legacy, discipline, and long-game wins.", money:"Shani rewards patience with GOLD. Your investment strategy: consistent, long-term, boring, and extremely effective. You will be wealthy at 35, comfortable at 30, and respected at 40. Compound interest is your cosmic birthright.", career:"Executive, Finance Head, Policy Maker, Senior Engineer, or that CTO who has seen it all and can predict any outcome. In AI: MLOps, AI infrastructure, or founding a company built to last decades.", love:"You love slowly and permanently. Compatible with: Taurus (equally committed) and Virgo (respects your work ethic). Warning: Aries will call you 'too serious.' Tell them Saturn sends its regards." },
-  Aquarius:    { life:"Aquarius — the universe's open-source contributor. Prometheus literally stole fire from the gods to give to humans. You are Prometheus. You are also the person who will explain why the current system is broken AND ship a better one. Indra (king of gods) and Prometheus both approve.", money:"Your relationship with money is… philosophical. You think about economic systems while watching your savings account. Fix this: automate investments, then philosophize freely. Your unique ideas ARE monetizable — the world just needs you to package them properly.", career:"Technologist, Activist, AI Researcher, Futurist, Social Entrepreneur. You were born for the AI era. You think about systems, not just solutions. Your best career move: work on problems that don't have obvious answers yet.", love:"You love ideas first, people second. Compatible with: Gemini (intellectual match) and Libra (social justice partners). Warning: Taurus will want stability you're not ready to give. Or are you? Reconsider." },
-  Pisces:      { life:"Pisces — the universe's empathetic dreamer who accidentally became the most spiritually advanced sign. Poseidon and Vishnu both claim you — gods of ocean and universe. You feel things others can't perceive, see patterns in chaos, and cry at music that's genuinely beautiful. This is called being evolved.", money:"Jupiter blesses you, but Neptune makes you dreamy about finances. The solution: find a Virgo or Capricorn to be your financial accountability partner. Your INTUITION about trends is genuinely valuable — trust it, but write it down.", career:"Artist, Healer, Data Scientist (patterns ARE your thing), UX Designer, or AI Ethics Researcher. You are excellent at understanding human emotion — in the AI era, this is worth more than you know.", love:"You love unconditionally and completely. Compatible with: Scorpio (depth matches depth) and Cancer (equally oceanic). Warning: Gemini will charm you completely. This is a feature, not a bug, if you set boundaries." }
+  Aries: {
+    life: "okay so you're an Aries which basically means you were born to be the main character and you KNOW it 💅 Lord Kartikeya gave you that 'ship it first, fix it later' energy and honestly? it's working. you're literally the universe's beta tester — chaotic, yes, but also the most alive person in any room. your villain era and your glow up are the SAME era. no notes.",
+    money: "bestie your wallet is giving 'earn fast spend faster' and Lakshmi is stressed 😭 the divine treasurer literally manifests bag for you but you keep buying things at 2am after seeing one reel. the fix: automate your savings before your brain can gaslight you into another impulse purchase. SIPs are your soulmate. invest like you're a main character in a finance bro podcast.",
+    career: "you were literally built for the AI era no cap 🔥 Mars gave you the 'i'll figure it out live' energy that actually WORKS in tech startups. best fits: founder, AI agent builder, or that person who deploys first and reads the docs later. your career arc goes: chaos → competence → bag. trust the process bestie.",
+    love: "you love hard and leave fast and both things can be true 💔 compatible with Leos (matching main character energy) and Sagittarius (will actually keep up with you). red flag alert: Taurus will try to slow you down. you'll find this annoying. deeply, personally, cosmically annoying."
+  },
+  Taurus: {
+    life: "Taurus girlie/baddie you are literally the universe's luxury era personified ✨ Lakshmi literally has your energy — abundant, beautiful, unbothered. you're the person who makes every space aesthetic and every meal an experience. slow to start, but when you move? it's giving generational wealth. the PATIENCE on you is celestial.",
+    money: "Venus rules your bag and honestly she's doing amazing sweetie 💸 you attract money naturally but also spend it on 'soft life' things. rule: for every aesthetic purchase, invest twice. your cosmic portfolio is giving real estate, gold, long-term SIPs, and 'I told you so' energy when everyone else panic-sells. stable king/queen behavior.",
+    career: "stubbornness is just commitment with better PR and you invented that 🏆 you excel at: AI product design, finance, architecture, or anything that rewards patience and taste. you will outlast every trend, every layoff, every 'AI will replace us' panic thread. grounded era only.",
+    love: "loyal, slow-burning, and you will not be rushed — period 💕 compatible with Virgo (appreciates your taste) and Capricorn (equally ambitious). watch out: Gemini will text you five different personalities in one day. the block button exists for a reason bestie."
+  },
+  Gemini: {
+    life: "gemini you absolute chaos agent with the RANGE 🌪️ the universe literally needed someone to do five things simultaneously while explaining it to everyone else, and you said 'bet'. Saraswati gave you the words and Mercury gave you the speed. your superpower is switching between 'genius' and 'disaster' so fast that people can't tell the difference. this is the way.",
+    money: "your relationship with money is giving 'earned it, spent it, where did it go' energy 😭 multiple income streams are your love language — freelance, side hustles, content, that thing you do where you explain stuff and people pay you. automate your savings before your brain decides to 'invest' in a course at 1am. you have ADHD with your finances and that's okay. we automate.",
+    career: "you were MADE for the AI era no cap 🤖 prompting, content creation, dev advocacy, sales — you do all of it and somehow well. your unfair advantage: you can explain literally anything simply. best roles: AI PM, developer advocate, or the person whose README actually gets read. the tech world needs your brain.",
+    love: "you need intellectual stimulation or you will ghost without warning 👻 compatible with Aquarius (matches your unhinged energy) and Libra (can keep up with your monologues). red flag: Scorpio will try to understand ALL of your personalities. this is how the drama arc begins."
+  },
+  Cancer: {
+    life: "Cancer bestie you are literally the moon's favourite person and she is NOT playing 🌙 Chandra gives you the ability to feel everything at 1000% intensity — yes including that random sad song at 11pm. you are deeply intuitive, fiercely protective of your people, and your gut feeling has a better track record than most AI models. this is a flex not a flaw.",
+    money: "your money energy is literally 'emergency fund as self-care' and that's actually correct 💰 you save to feel SAFE, which is financially brilliant even if your therapist has thoughts about it. build the fortress: emergency fund → investments → treats. your emotional intelligence makes you EXCELLENT at spotting toxic business partners before the red flags are visible to others.",
+    career: "home, safety, and nurturing themes run through your entire career arc 🏡 best fits: data science (your intuition reads patterns before algorithms do), UX research (you understand humans on a cellular level), mental health tech, healthcare AI, or founding something that genuinely helps people. your AI niche is human-centered AI. go build it.",
+    love: "you love with your WHOLE chest and anyone who gets that is lucky fr 🫀 compatible with Scorpio (equally intense, equally loyal) and Pisces (will appreciate every layer of you). watch out: Aries will rush your process. let them try. they'll learn."
+  },
+  Leo: {
+    life: "okay LEO the sun literally decided to take human form and chose YOU, no notes 👑 you are the main character in every room and the universe agreed to this. Lord Vishnu — the PRESERVER of the entire universe — is your cosmic patron. you weren't born to blend in. you were born to be studied. regal behavior only, always.",
+    money: "Apollo rides a golden chariot and so should your investment portfolio 💛 you spend lavishly AND earn lavishly and both things are facts. the key: redirect that Leo generosity toward assets, not just vibes. you are literally built for pitching — your aura alone has closed deals. in the AI era: be the face. be the brand. be the demo.",
+    career: "you were born to lead, present, inspire, and honestly? be a little intimidating 🎤 CEO, public speaker, that engineer who does demos and somehow makes bubble sort look legendary. in AI: you should be on stages talking about AI, not hiding in a terminal window. the world needs to see you. let it.",
+    love: "you love GRANDLY and you deserve someone who matches that energy completely 🔥 compatible with Aries (equal fire) and Sagittarius (will worship you correctly). watch out: Capricorn will show up with a relationship KPI spreadsheet. you'll find this simultaneously annoying and weirdly attractive. the cosmos cannot explain it either."
+  },
+  Virgo: {
+    life: "Virgo you spotted the inconsistency in this reading before you even finished the first sentence didn't you 🧐 Athena AND Saraswati both blessed you because one goddess wasn't enough for your precision. you are the universe's QA engineer, the person everyone calls when chaos strikes, and the only one who actually reads the documentation. we owe you everything.",
+    money: "bestie you are BUILT different with finances and it shows 📊 you research before buying. you read the fine print. you have a budget with categories. Shani (Saturn) respects this behavior immensely. your only flaw: analysis paralysis. sometimes just buy the index fund and stop doom-scrolling r/personalfinance at midnight. you already know enough.",
+    career: "you were literally created for: data analysis, AI/ML engineering, medical research, or being the engineer who writes the documentation that saves entire projects 🏅 your code has comments. you test edge cases. you are the reason prod doesn't break. this is the most important job. own it.",
+    love: "you love carefully and completely and you deserve the same in return 💙 compatible with Taurus (earthy, stable, appreciates your taste) and Capricorn (your work ethic is their love language). watch out: Sagittarius will call you 'too cautious.' they are chronically wrong about this."
+  },
+  Libra: {
+    life: "Libra you are THEE cosmic diplomat, the aesthetic one, the person who makes every room immediately better just by existing in it ⚖️ Themis and Lakshmi both bless you with fairness AND beauty, which is genuinely unfair to everyone else. you're currently holding the scales of justice in one hand and a mood board in the other. iconic behavior.",
+    money: "Venus is literally your financial advisor and she's doing amazing sweetie 💗 but bestie the INDECISION is costing you compound interest. solution: 24-hour rule on all financial decisions, then commit. no more 'i'll think about it for 6 months.' find a Capricorn accountability partner and watch your bank account glow up immediately.",
+    career: "law, design, UX/UI, diplomacy, AI ethics (yes this is a real and growing field), or brand strategy 🎨 you make everything look AND feel better. your negotiation skills are genuinely worth six figures minimum. the AI era needs people who understand fairness, balance, and what actually feels good to humans. that's you.",
+    love: "you are literally the most romantic sign and you deserve that energy back 100% 🌸 compatible with Gemini (the intellectual tension is immaculate) and Aquarius (deep friendship to romance pipeline). watch out: you'll spend four months deciding if you like someone. they'll have already figured it out and moved on. make a decision bestie."
+  },
+  Scorpio: {
+    life: "Scorpio you came here to investigate, transform, and absolutely not be perceived 🦂 Lord Shiva AND Hades both claimed you which means the most powerful forces in two mythologies said 'yes, this one.' you see through people before they finish their first sentence. this is terrifying and also your greatest gift. the intensity is the point.",
+    money: "Mars and Pluto make you a financial WARRIOR and honestly the returns show it 📈 you are built for high-risk high-reward — crypto, early-stage startups, deep value plays. your all-or-nothing nature can create massive wins OR cinematic losses. the fix: diversify even when it feels like betraying your personality. it's called risk management bestie.",
+    career: "investigator, surgeon, intelligence analyst, cybersecurity, or the ML engineer who finds the data pattern everyone else missed 🔍 you never do anything halfway and this is your biggest competitive advantage. in the AI era: security AI, fraud detection, or research that requires going where others won't. you were made for the hard problems.",
+    love: "you love with terrifying depth and whoever receives that is cosmically lucky 🖤 compatible with Cancer (intensity for intensity) and Pisces (appreciates the depths). watch out: Gemini will confuse you. this will intrigue you. this intrigue will become obsession. this is how the drama arc begins. you have been warned."
+  },
+  Sagittarius: {
+    life: "SAG you are literally the universe's philosopher who accidentally became a comedian while searching for the meaning of life 🏹 Zeus AND Brahma are your patrons — like the two biggest bosses in their respective mythologies just vibed and said 'this one.' big dreams. big jokes. big energy. you were born to explore, learn, overshare your findings, and inspire everyone around you.",
+    money: "Jupiter expands literally everything it touches including your income AND your spending and we have feelings about this 💸 earn big, live big, but for the love of Lakshmi SAVE something. your best investment: yourself. courses, certifications, the kind of travel that builds skills. your knowledge compounds like interest when you let it.",
+    career: "teacher, philosopher, travel creator, startup founder, AI researcher who actually has a personality online, or international business 🌍 you need FREEDOM in your work or you will literally dissolve. remote-first companies were invented for your energy. in the AI era: be the one who builds AND explains. the world needs both.",
+    love: "you need intellectual AND physical adventure from a partner or you're out 🔥 compatible with Aries (actually keeps up with you) and Leo (matches the energy correctly). watch out: Virgo will write a pros/cons list about dating you. you'll find this hilarious. it will not help your case."
+  },
+  Capricorn: {
+    life: "Capricorn you have been employee of the universe since birth and Shani (Saturn) is proud but also still giving you tests 🐐 you are literally the sign of legacy, discipline, and 'i told you the long game was the play.' while everyone else was chasing trends you were quietly building something that will outlast all of them. unbothered. focused. generational wealth incoming.",
+    money: "Shani rewards patience with GOLD and your portfolio is proof 📊 boring, consistent, long-term, extremely effective. compound interest is your cosmic birthright. you will be comfortable at 30, wealthy at 35, and the person everyone asks for financial advice at 40. the boring strategy wins. you already knew this.",
+    career: "executive, CTO, finance head, senior engineer, or the person who has genuinely seen it all and can predict outcomes before they happen 💼 in AI: MLOps, infrastructure, or founding something built to last decades not quarters. your career doesn't peak — it compounds. the slow burn is the point.",
+    love: "you love slowly, permanently, and with full intention 🤎 compatible with Taurus (equally committed to the long game) and Virgo (your work ethic is their love language). watch out: Aries will call you 'too serious.' inform them that Saturn sends its regards and keep moving."
+  },
+  Aquarius: {
+    life: "Aquarius you are literally the universe's open-source contributor and you've been trying to merge your PR into society for years 🛸 Prometheus stole fire from the gods to give to humans. you ARE Prometheus. you see what's broken, you build the fix, and you explain why the old system was wrong. Indra and Prometheus both approve. the rebels always do.",
+    money: "your relationship with money is giving 'i understand economic theory but my savings account is a disaster' and we need to fix that 💡 your ideas ARE monetizable — the world just needs you to package them properly. automate investments first, philosophize about late-stage capitalism second. you were built for multiple income streams and passive income era.",
+    career: "technologist, activist, AI researcher, futurist, social entrepreneur — you were MADE for the AI era no debate 🤖 you think in systems not just solutions. your best career move: work on problems that don't have obvious answers yet. in the AI world: AI safety, alignment research, or building tools that actually democratize access. the future is yours to design.",
+    love: "you fall for ideas and then for people and honestly the pipeline makes sense 💙 compatible with Gemini (intellectual chaos match) and Libra (social justice power couple potential). watch out: Taurus will want the stability you keep saying you'll provide 'eventually.' that conversation is coming bestie."
+  },
+  Pisces: {
+    life: "Pisces you are literally the most spiritually evolved sign and you feel it constantly don't you 🌊 Poseidon AND Vishnu both claimed you — gods of the ocean and the entire universe. you feel things others can't even perceive, you see patterns in chaos, and you cry at music that hits different. this isn't sensitivity. this is being cosmically calibrated.",
+    money: "Jupiter blesses you but Neptune has you out here making financial decisions based on vibes and feelings 💸 your INTUITION about trends is genuinely valuable — trust it, but write it down and then actually follow through. find a Virgo or Capricorn accountability partner immediately. your insight + their execution = generational bag energy.",
+    career: "artist, healer, data scientist (you read patterns like emotions), UX designer, or AI ethics researcher 🎨 your emotional intelligence is literally one of the most valuable skills in the AI era — machines can process, but only you can feel. human-centered AI, mental health tech, creative AI tools. go build what only you could imagine.",
+    love: "you love unconditionally and completely and you deserve that exact same energy back 🌀 compatible with Scorpio (depth meets depth, ocean meets ocean) and Cancer (equally feeling, equally loyal). watch out: Gemini will charm you absolutely completely. this is a feature not a bug IF you set boundaries. that's the whole lesson."
+  }
 };
 
 /* ═══════════════════════════════════════════════
@@ -803,11 +983,11 @@ function drawKundali(sign) {
   ];
 
   let html = `
-    <rect x="10" y="10" width="300" height="300" fill="rgba(5,5,30,0.95)" rx="8"/>
-    <line x1="10" y1="10" x2="310" y2="310" stroke="rgba(180,74,255,0.4)" stroke-width="1"/>
-    <line x1="310" y1="10" x2="10" y2="310" stroke="rgba(180,74,255,0.4)" stroke-width="1"/>
-    <line x1="160" y1="10" x2="160" y2="310" stroke="rgba(180,74,255,0.25)" stroke-width="0.8" stroke-dasharray="4,4"/>
-    <line x1="10" y1="160" x2="310" y2="160" stroke="rgba(180,74,255,0.25)" stroke-width="0.8" stroke-dasharray="4,4"/>
+    <rect x="10" y="10" width="300" height="300" fill="rgba(13,10,32,0.97)" rx="8"/>
+    <line x1="10" y1="10" x2="310" y2="310" stroke="rgba(168,85,247,0.35)" stroke-width="1"/>
+    <line x1="310" y1="10" x2="10" y2="310" stroke="rgba(168,85,247,0.35)" stroke-width="1"/>
+    <line x1="160" y1="10" x2="160" y2="310" stroke="rgba(168,85,247,0.22)" stroke-width="0.8" stroke-dasharray="4,4"/>
+    <line x1="10" y1="160" x2="310" y2="160" stroke="rgba(168,85,247,0.22)" stroke-width="0.8" stroke-dasharray="4,4"/>
     <rect x="10" y="10" width="300" height="300" fill="none" rx="8" stroke="rgba(255,215,0,0.3)" stroke-width="1.5"/>
   `;
 
@@ -840,11 +1020,11 @@ function drawKundali(sign) {
     const isLagna = i === 0;
     html += `
       <text x="${lx}" y="${ly-6}" text-anchor="middle"
-        font-size="${isLagna?'16':'14'}" fill="${isLagna?'#ffd700':'rgba(180,74,255,0.8)'}">
+        font-size="${isLagna?'16':'14'}" fill="${isLagna?'#f5c842':'rgba(168,85,247,0.55)'}">
         ${rashiEmoji[rIdx]}
       </text>
       <text x="${lx}" y="${ly+8}" text-anchor="middle"
-        font-size="7" fill="${isLagna?'#ffd700':'rgba(150,150,200,0.6)'}"
+        font-size="7" fill="${isLagna?'#f5c842':'rgba(150,150,200,0.6)'}"
         font-family="Rajdhani,sans-serif">
         ${isLagna?'LAGNA':''}
       </text>
@@ -853,11 +1033,11 @@ function drawKundali(sign) {
 
   // Center circle
   html += `
-    <circle cx="${cx}" cy="${cy}" r="28" fill="rgba(10,0,40,0.9)"
+    <circle cx="${cx}" cy="${cy}" r="28" fill="rgba(15,8,40,0.92)"
       stroke="rgba(255,215,0,0.5)" stroke-width="1.5"/>
-    <text x="${cx}" y="${cy-5}" text-anchor="middle" font-size="18" fill="#ffd700">${z.e}</text>
+    <text x="${cx}" y="${cy-5}" text-anchor="middle" font-size="18" fill="#f5c842">${z.e}</text>
     <text x="${cx}" y="${cy+10}" text-anchor="middle" font-size="7"
-      fill="#a0a0cc" font-family="Rajdhani,sans-serif">${sign.toUpperCase()}</text>
+      fill="#b0b0d4" font-family="Rajdhani,sans-serif">${sign.toUpperCase()}</text>
   `;
 
   svg.innerHTML = html;
@@ -881,12 +1061,12 @@ function setMode(m) {
 async function callGroq(apiKey, name, sign, rashi, lifePath, planet, element, city, dob) {
   const z = ZODIAC[sign];
   const cn = getChineseZodiac(parseInt(dob.split('-')[0]));
-  const prompt = `You are CosmicGPT — the world's most ancient yet futuristic AI oracle, a cosmic mashup of:
-• Maharishi Parashara (legendary Vedic astrologer, 3000 BCE)
-• The Oracle of Delphi (ancient Greek prophet)
-• A Silicon Valley AI founder who just closed a $100M Series A
+  const prompt = `You are AstroFin GPT — a Gen Z astrologer who is also somehow a 5000-year-old Vedic sage and a Silicon Valley founder. you are the cosmic mashup of:
+• maharishi parashara (legendary vedic astrologer, 3000 BCE, but make it brainrot)
+• the oracle of delphi (ancient greek prophet, but she's on instagram now)
+• a gen z tech bro who just raised a seed round and reads birth charts at 2am
 
-Your style: hilarious, warm, surprising, specific. Mix Sanskrit references with startup/AI/tech analogies. Reference Hindu gods (Ganesha, Lakshmi, Shiva, Saraswati, Vishnu) AND Greek gods (Zeus, Athena, Hermes, Apollo). Use emojis freely.
+your VIBE: lowercase, chaotic, weirdly accurate, uses 'bestie' and 'no cap' and 'this is giving' unironically. mix Sanskrit/Hindi terms naturally. reference Hindu gods (Ganesha, Lakshmi, Shiva, Saraswati, Vishnu, Shani, Chandra) AND Greek gods (Zeus, Athena, Hermes, Apollo, Hades). use emojis like punctuation. be funny, warm, and surprisingly useful.
 
 USER PROFILE:
 Name: ${name}
@@ -896,24 +1076,24 @@ Chinese Zodiac: ${cn} | Life Path Number: ${lifePath}
 Ruling Planet: ${planet} | Element: ${element}
 Patron Deity: ${z.god} (Hindu) / ${z.deity.split('/')[1].trim()} (Greek)
 
-Write EXACTLY these 5 sections with these EXACT headings:
+Write EXACTLY these 5 sections with these EXACT headings (include the emoji):
 
 🌟 COSMIC PROFILE
-(2-3 funny sentences about who ${name} is based on their signs. Include a startup/AI analogy.)
+(2-3 sentences. who IS ${name} cosmically? be specific and chaotic. drop a gen z phrase. include an AI/tech analogy.)
 
-💰 WEALTH ORACLE  
-(Specific money predictions. Reference Lakshmi, Kubera, or Plutus. Include one actionable tip. Be funny but useful.)
+💰 WEALTH ORACLE
+(specific money predictions for ${name}. reference Lakshmi or Kubera. one actionable financial tip. make it funny but actually useful. use 'bestie' at least once.)
 
 🚀 CAREER COSMOS
-(Career path with AI-era insights. What role suits them? What should they build or learn? Reference their patron deity.)
+(career path advice for the AI era. what should ${name} literally build or learn rn. reference their patron deity. use gen z slang naturally.)
 
 ❤️ LOVE ALGORITHM
-(Relationship insights. Name compatible signs. One funny warning about an incompatible sign. Use a tech metaphor.)
+(relationship insights. name 2 compatible signs with brief reasons. one funny warning about an incompatible sign. use a tech/app metaphor.)
 
 ⚠️ COSMIC WARNING
-(Something they need to watch out for in life — unique to their chart. Funny but wise. End with a funny accuracy disclaimer.)
+(one specific thing ${name} needs to stop doing or watch out for. funny but genuinely wise. end with a disclaimer that's 10x funnier than 'for entertainment purposes only'.)
 
-Keep each section to 3-5 sentences. Be memorable, warm, and genuinely helpful.`;
+keep each section 3-5 sentences max. lowercase preferred. be iconic.`;
 
   const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
     method: 'POST',
@@ -1044,11 +1224,11 @@ function renderMercury() {
    LOADING MESSAGES
 ═══════════════════════════════════════════════ */
 const loadMsgs = [
-  ["Consulting Ancient Algorithms…",    "Narada Muni is fact-checking your karma on GPT-4."],
-  ["Aligning Cosmic Parameters…",       "Zeus is reviewing your case. He's on his 3rd coffee."],
-  ["Calculating Planetary Positions…",  "Shani (Saturn) is loading your karma report. Please wait patiently."],
-  ["Running Vedic-ML Model v5000…",     "The model was trained on 5000 years of Jyotish data."],
-  ["Querying the Akashic Records…",     "Vishnu is buffering. The universe is on 3G today."],
+  ["bestie hold on the stars are loading… 🔮",      "narada muni is literally speed-running your karma report. please be patient."],
+  ["the oracle is in her reading era ✨",             "lord shani is buffering. the universe is on 3G today. not his fault."],
+  ["consulting ancient algorithms… no cap 🕉️",      "ganesha is removing obstacles from your destiny file. won't be long bestie."],
+  ["running vedic-ML model v5000… this is giving 🔥","zeus spilled his ambrosia. slight delay. totally normal cosmic behavior."],
+  ["akashic records loading… slay 🌙",               "vishnu paused mid-preservation to review your chart. you're welcome."],
 ];
 let loadInterval;
 
@@ -1299,23 +1479,19 @@ async function sendChat() {
   // Build system context with user's reading if available
   const sign = lastReading.sign || '';
   const z = sign ? ZODIAC[sign] : null;
-  const systemPrompt = `You are AstroFin GPT — a hilarious, wise, and deeply knowledgeable AI oracle that combines:
-• Vedic Jyotish astrology (Rashi, Nakshatras, planetary periods)
-• Greek mythology (Zeus, Athena, Hermes, Apollo, etc.)
-• Hindu mythology (Ganesha, Lakshmi, Shiva, Saraswati, Vishnu, Shani)
-• Modern personal finance and career coaching
-• Silicon Valley startup culture and AI industry knowledge
+  const systemPrompt = `you are AstroFin GPT — a gen z astrologer who is also a 5000-year-old vedic sage and somehow a tech founder. your vibe:
+- lowercase, chaotic, unhinged but accurate
+- mix Sanskrit/Vedic terms naturally with gen z slang
+- reference Hindu gods (Ganesha, Lakshmi, Shiva, Saraswati, Vishnu, Shani, Chandra) AND Greek gods casually
+- use 'bestie', 'no cap', 'this is giving', 'slay', 'era', 'fr', 'not X doing Y', 'the audacity', 'periodt' naturally
+- use emojis like punctuation 💀✨🔮🌙🪐
+- be weirdly specific and surprisingly useful
+- mix finance/career advice with cosmic wisdom
+- tech/AI/startup analogies whenever relevant
+- keep replies concise (3-5 sentences) unless asked for more
+- end with something iconic every single time
 
-${z ? `The user is ${lastReading.name}, a ${sign} (${z.rashi} Rashi), ruled by ${z.pl}, ${z.el} element. Patron deities: ${z.god} & ${z.deity}.` : 'The user has not yet done their reading.'}
-
-Your style:
-- Mix Sanskrit terms with tech/startup analogies
-- Be funny, warm, and surprisingly accurate
-- Reference specific Hindu/Greek gods naturally
-- Give actionable advice alongside cosmic wisdom
-- Keep replies concise (3-5 sentences max) unless asked for more
-- Use emojis naturally
-- End with a punchy one-liner or cosmic pun`;
+${z ? `the user is ${lastReading.name}, a ${sign} (${z.rashi} Rashi), ruled by ${z.pl}, ${z.el} element. patron deities: ${z.god} & ${z.deity}.` : "the user hasn't done their reading yet. roast them gently for this."}`;
 
   chatHistory.push({ role: 'user', content: msg });
 
